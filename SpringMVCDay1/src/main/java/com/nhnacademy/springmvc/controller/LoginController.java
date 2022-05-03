@@ -30,16 +30,12 @@ public class LoginController {
     public String doLogin(@RequestParam("id") String id,
                           @RequestParam("pwd") String pwd,
                           HttpServletRequest request,
-                          HttpServletResponse response,
                           ModelMap modelMap) {
+
         if (id.contains("admin") && pwd.contains("12345")) {
-
             HttpSession session = request.getSession(true);
-
-            Cookie cookie = new Cookie("SESSION", session.getId());
-            response.addCookie(cookie);
-
             modelMap.put("id", session.getId());
+
             return "thymeleaf/home";
         } else {
             return "redirect:thymeleaf/login";

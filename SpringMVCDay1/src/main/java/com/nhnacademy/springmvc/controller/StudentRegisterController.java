@@ -5,9 +5,11 @@ import com.nhnacademy.springmvc.domain.StudentNoIdRegister;
 import com.nhnacademy.springmvc.domain.StudentRegister;
 import com.nhnacademy.springmvc.exception.InputException;
 import com.nhnacademy.springmvc.repository.StudentRepository;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,16 +39,16 @@ public class StudentRegisterController {
 
     @PostMapping
     public String registerStudent(@Valid @ModelAttribute StudentNoIdRegister student,
-                                        BindingResult bindingResult,
-                                        @RequestParam("hideScore") String hideScore,Model model) {
+                                  BindingResult bindingResult,
+                                  @RequestParam("hideScore") String hideScore, Model model) {
         if (bindingResult.hasErrors()) {
             throw new InputException();
         }
         Student register =
-            studentRepository.register(student.getName(), student.getEmail(), student.getScore(),
-                student.getComment());
-        if(hideScore.contains("yes")){
-            model.addAttribute("hideScore",hideScore);
+                studentRepository.register(student.getName(), student.getEmail(), student.getScore(),
+                        student.getComment());
+        if (hideScore.contains("yes")) {
+            model.addAttribute("hideScore", hideScore);
             model.addAttribute("student", register);
             return "thymeleaf/studentHideView";
         }

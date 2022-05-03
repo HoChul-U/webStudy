@@ -1,15 +1,19 @@
 package com.nhnacademy.springmvc.domain;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.Value;
 import org.hibernate.validator.constraints.Length;
 
-@Value
+@Data
+@Valid
 public class StudentNoIdRegister {
     @NotBlank
     private String name;
