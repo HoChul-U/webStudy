@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/thymeleaf/login" method="post">
+    <input type="text" name="id"/><br>
+    <input type="pwd" name="pwd"/><br>
+    <button type="submit"><span th:text="#{login}"></span></button>
+    <button type="button" onclick="location.href='/thymeleaf/logout'"><span th:text="#{logout}"></span></button>
+</form>
+</body>
+</html>

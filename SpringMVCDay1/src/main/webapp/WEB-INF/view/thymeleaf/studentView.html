@@ -1,0 +1,15 @@
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>학생 정보 조회</title>
+</head>
+<body>
+<span th:text="#{id}"/><span th:text="${student.id}"/><br />
+<span th:text="#{name}"/><span th:text="${student.name}"/>
+<span th:text="#{email}"/><span th:text="${student.score}"/>
+<span th:text="#{comment}"/><span th:text="${student.comment}"/>
+    <br />
+    <a th:href="'/student/'+ ${student.id} + '/modify'"><span th:text="#{fixInfo}"/></a><br />
+    <a th:href="'/'"><span th:text="#{root}"/></a>
+</body>
+</html>
