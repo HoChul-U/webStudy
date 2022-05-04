@@ -29,6 +29,11 @@ public class StudentRepositoryImpl implements StudentRepository {
     }
 
     @Override
+    public Student addStudent(long id, String name, String email, int score, String commenet) {
+        return studentRepository.put(id, new Student(id, name, email, score, commenet));
+    }
+
+    @Override
     public Student getStudent(long id) {
         if(!exists(id)){
             throw new StudentNotFoundException();
