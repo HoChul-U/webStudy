@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ko">
+ <head> 
+  <meta charset="UTF-8"> 
+  <title>ColorTokenizer</title>
+ </head>
+ <body>
+  <span style="color:blue">//</span>
+  <br><span style="color:blue">// Source code recreated from a .class file by IntelliJ IDEA</span>
+  <br><span style="color:blue">// (powered by FernFlower decompiler)</span>
+  <br><span style="color:blue">//</span>
+  <br>
+  <br><span style="color:orange">package</span>&nbsp;&nbsp;<span style="color:black">org.springframework.core.convert.support;</span>&nbsp;
+  <br>
+  <br><span style="color:orange">import</span>&nbsp;&nbsp;<span style="color:black">java.util.Collection;</span>&nbsp;
+  <br><span style="color:orange">import</span>&nbsp;&nbsp;<span style="color:black">java.util.Collections;</span>&nbsp;
+  <br><span style="color:orange">import</span>&nbsp;&nbsp;<span style="color:black">java.util.Iterator;</span>&nbsp;
+  <br><span style="color:orange">import</span>&nbsp;&nbsp;<span style="color:black">java.util.Set;</span>&nbsp;
+  <br><span style="color:orange">import</span>&nbsp;&nbsp;<span style="color:black">java.util.StringJoiner;</span>&nbsp;
+  <br><span style="color:orange">import</span>&nbsp;&nbsp;<span style="color:black">org.springframework.core.convert.ConversionService;</span>&nbsp;
+  <br><span style="color:orange">import</span>&nbsp;&nbsp;<span style="color:black">org.springframework.core.convert.TypeDescriptor;</span>&nbsp;
+  <br><span style="color:orange">import</span>&nbsp;&nbsp;<span style="color:black">org.springframework.core.convert.converter.ConditionalGenericConverter;</span>&nbsp;
+  <br><span style="color:orange">import</span>&nbsp;&nbsp;<span style="color:black">org.springframework.core.convert.converter.GenericConverter.ConvertiblePair;</span>&nbsp;
+  <br><span style="color:orange">import</span>&nbsp;&nbsp;<span style="color:black">org.springframework.lang.Nullable;</span>&nbsp;
+  <br>
+  <br><span style="color:orange">final</span>&nbsp;&nbsp;<span style="color:orange">class</span>&nbsp;&nbsp;<span style="color:black">CollectionToStringConverter</span>&nbsp;&nbsp;<span style="color:orange">implements</span>&nbsp;&nbsp;<span style="color:black">ConditionalGenericConverter</span>&nbsp;&nbsp;<span style="color:black">{</span>&nbsp;
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:orange">private</span>&nbsp;&nbsp;<span style="color:orange">static</span>&nbsp;&nbsp;<span style="color:orange">final</span>&nbsp;&nbsp;<span style="color:black">String</span>&nbsp;&nbsp;<span style="color:black">DELIMITER</span>&nbsp;&nbsp;<span style="color:black">=</span>&nbsp;&nbsp;<span style="color:black"></span><span style="color:green">","</span>&nbsp;<span style="color:black">;</span>
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:orange">private</span>&nbsp;&nbsp;<span style="color:orange">final</span>&nbsp;&nbsp;<span style="color:black">ConversionService</span>&nbsp;&nbsp;<span style="color:black">conversionService;</span>&nbsp;
+  <br>
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:orange">public</span>&nbsp;&nbsp;<span style="color:black">CollectionToStringConverter(ConversionService</span>&nbsp;&nbsp;<span style="color:black">conversionService)</span>&nbsp;&nbsp;<span style="color:black">{</span>&nbsp;
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:black">this.conversionService</span>&nbsp;&nbsp;<span style="color:black">=</span>&nbsp;&nbsp;<span style="color:black">conversionService;</span>&nbsp;
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:black">}</span>&nbsp;
+  <br>
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:orange">public</span>&nbsp;&nbsp;<span style="color:black">Set
+   <convertiblepair></convertiblepair></span>&nbsp;&nbsp;<span style="color:black">getConvertibleTypes()</span>&nbsp;&nbsp;<span style="color:black">{</span>&nbsp;
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:orange">return</span>&nbsp;&nbsp;<span style="color:orange">Collections.singleton(new</span>&nbsp;&nbsp;<span style="color:orange">ConvertiblePair(Collection.class,</span>&nbsp;&nbsp;<span style="color:orange">String.class));</span>&nbsp;
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:black">}</span>&nbsp;
+  <br>
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:orange">public</span>&nbsp;&nbsp;<span style="color:black">boolean</span>&nbsp;&nbsp;<span style="color:black">matches(TypeDescriptor</span>&nbsp;&nbsp;<span style="color:black">sourceType,</span>&nbsp;&nbsp;<span style="color:black">TypeDescriptor</span>&nbsp;&nbsp;<span style="color:black">targetType)</span>&nbsp;&nbsp;<span style="color:black">{</span>&nbsp;
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:orange">return</span>&nbsp;&nbsp;<span style="color:black">ConversionUtils.canConvertElements(sourceType.getElementTypeDescriptor(),</span>&nbsp;&nbsp;<span style="color:black">targetType,</span>&nbsp;&nbsp;<span style="color:black">this.conversionService);</span>&nbsp;
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:black">}</span>&nbsp;
+  <br>
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:black">@Nullable</span>&nbsp;
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:orange">public</span>&nbsp;&nbsp;<span style="color:black">Object</span>&nbsp;&nbsp;<span style="color:black">convert(@Nullable</span>&nbsp;&nbsp;<span style="color:black">Object</span>&nbsp;&nbsp;<span style="color:black">source,</span>&nbsp;&nbsp;<span style="color:black">TypeDescriptor</span>&nbsp;&nbsp;<span style="color:black">sourceType,</span>&nbsp;&nbsp;<span style="color:black">TypeDescriptor</span>&nbsp;&nbsp;<span style="color:black">targetType)</span>&nbsp;&nbsp;<span style="color:black">{</span>&nbsp;
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:black">if</span>&nbsp;&nbsp;<span style="color:black">(source</span>&nbsp;&nbsp;<span style="color:black">==</span>&nbsp;&nbsp;<span style="color:black">null)</span>&nbsp;&nbsp;<span style="color:black">{</span>&nbsp;
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:orange">return</span>&nbsp;&nbsp;<span style="color:black">null;</span>&nbsp;
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:black">}</span>&nbsp;&nbsp;<span style="color:black">else</span>&nbsp;&nbsp;<span style="color:black">{</span>&nbsp;
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:black">Collection<!--?--></span>&nbsp;&nbsp;<span style="color:black">sourceCollection</span>&nbsp;&nbsp;<span style="color:black">=</span>&nbsp;&nbsp;<span style="color:black">(Collection)source;</span>&nbsp;
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:black">if</span>&nbsp;&nbsp;<span style="color:black">(sourceCollection.isEmpty())</span>&nbsp;&nbsp;<span style="color:black">{</span>&nbsp;
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:orange">return</span>&nbsp;&nbsp;<span style="color:black"></span><span style="color:green">""</span>&nbsp;<span style="color:black">;</span>
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:black">}</span>&nbsp;&nbsp;<span style="color:black">else</span>&nbsp;&nbsp;<span style="color:black">{</span>&nbsp;
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:black">StringJoiner</span>&nbsp;&nbsp;<span style="color:black">sj</span>&nbsp;&nbsp;<span style="color:black">=</span>&nbsp;&nbsp;<span style="color:orange">new</span>&nbsp;&nbsp;<span style="color:black">StringJoiner(</span><span style="color:green">","</span>&nbsp;<span style="color:black">);</span>
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:black">Iterator</span>&nbsp;&nbsp;<span style="color:black">var6</span>&nbsp;&nbsp;<span style="color:black">=</span>&nbsp;&nbsp;<span style="color:black">sourceCollection.iterator();</span>&nbsp;
+  <br>
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:black">while(var6.hasNext())</span>&nbsp;&nbsp;<span style="color:black">{</span>&nbsp;
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:black">Object</span>&nbsp;&nbsp;<span style="color:black">sourceElement</span>&nbsp;&nbsp;<span style="color:black">=</span>&nbsp;&nbsp;<span style="color:black">var6.next();</span>&nbsp;
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:black">Object</span>&nbsp;&nbsp;<span style="color:black">targetElement</span>&nbsp;&nbsp;<span style="color:black">=</span>&nbsp;&nbsp;<span style="color:black">this.conversionService.convert(sourceElement,</span>&nbsp;&nbsp;<span style="color:black">sourceType.elementTypeDescriptor(sourceElement),</span>&nbsp;&nbsp;<span style="color:black">targetType);</span>&nbsp;
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:black">sj.add(String.valueOf(targetElement));</span>&nbsp;
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:black">}</span>&nbsp;
+  <br>
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:orange">return</span>&nbsp;&nbsp;<span style="color:black">sj.toString();</span>&nbsp;
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:black">}</span>&nbsp;
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:black">}</span>&nbsp;
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:black">}</span>&nbsp;
+  <br><span style="color:black">}</span>&nbsp;
+  <br>
+ </body>
+</html>
