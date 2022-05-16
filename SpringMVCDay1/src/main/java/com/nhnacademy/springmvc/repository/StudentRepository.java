@@ -7,7 +7,10 @@ public interface StudentRepository {
 
     Student register(String name, String email, int score, String comment);
 
+    Student addStudent(long id, String name, String email, int score, String commenet);
+
     Student getStudent(long id);
 
-    void modify(Student student);
+    Student modify(Student student);
+
 }

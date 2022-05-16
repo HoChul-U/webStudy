@@ -27,6 +27,9 @@ public class Student {
     @Length(min = 0, max = 200)
     private String comment;
 
+    public Student() {
+    }
+
     public Student(long id, String name, String email, int score, String comment) {
         this.id = id;
         this.name = name;
@@ -35,4 +38,10 @@ public class Student {
         this.comment = comment;
     }
 
+    public Student(String name, String email, int score, String comment) {
+        this.name = name;
+        this.email = email;
+        this.score = score;
+        this.comment = comment;
+    }
 }

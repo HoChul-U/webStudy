@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class LogOutController {
 
-    @GetMapping("thymeleaf/logout")
+    @GetMapping("/logout")
     public String LogOut(HttpServletRequest request){
         HttpSession session = request.getSession(false);
         if(Objects.nonNull(session)){

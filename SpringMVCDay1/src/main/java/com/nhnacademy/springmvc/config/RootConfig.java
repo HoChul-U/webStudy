@@ -19,7 +19,7 @@ public class RootConfig {
     @Bean
     public StudentRepository studentRepository() {
         StudentRepository studentRepository = new StudentRepositoryImpl();
-        studentRepository.register("admin", "kim.student@nhnacademy.com", 100, "훌륭");
+        studentRepository.addStudent(0,"admin", "kim.student@nhnacademy.com", 100, "훌륭");
 
         return studentRepository;
     }

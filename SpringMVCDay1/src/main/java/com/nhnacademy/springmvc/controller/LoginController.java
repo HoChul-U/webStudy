@@ -16,17 +16,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class LoginController {
 
-    @GetMapping("thymeleaf/login")
+    @GetMapping("/login")
     public String login(@CookieValue(value = "SESSION", required = false) String session,
                         Model model) {
         if (Objects.isNull(session)) {
-            throw new RuntimeException();
+            return "thymeleaf/login";
         }
         model.addAttribute("id", session);
         return "thymeleaf/home";
     }
 
-    @PostMapping("thymeleaf/login")
+    @PostMapping("/login")
     public String doLogin(@RequestParam("id") String id,
                           @RequestParam("pwd") String pwd,
                           HttpServletRequest request,
@@ -35,7 +35,6 @@ public class LoginController {
         if (id.contains("admin") && pwd.contains("12345")) {
             HttpSession session = request.getSession(true);
             modelMap.put("id", session.getId());
-
             return "thymeleaf/home";
         } else {
             return "redirect:thymeleaf/login";

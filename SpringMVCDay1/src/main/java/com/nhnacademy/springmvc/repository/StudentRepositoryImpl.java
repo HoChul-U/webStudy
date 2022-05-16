@@ -1,6 +1,7 @@
 package com.nhnacademy.springmvc.repository;
 
 import com.nhnacademy.springmvc.domain.Student;
+import com.nhnacademy.springmvc.domain.StudentNoIdRegister;
 import com.nhnacademy.springmvc.exception.StudentNotFoundException;
 import java.util.Comparator;
 import java.util.Map;
@@ -11,7 +12,6 @@ import java.util.function.Function;
 public class StudentRepositoryImpl implements StudentRepository {
     private final Map<Long, Student> studentRepository = new ConcurrentHashMap<>();
 
-    private static long count=0;
     @Override
     public boolean exists(long id) {
         return studentRepository.containsKey(id);
@@ -29,6 +29,11 @@ public class StudentRepositoryImpl implements StudentRepository {
     }
 
     @Override
+    public Student addStudent(long id, String name, String email, int score, String commenet) {
+        return studentRepository.put(id, new Student(id, name, email, score, commenet));
+    }
+
+    @Override
     public Student getStudent(long id) {
         if(!exists(id)){
             throw new StudentNotFoundException();
@@ -37,14 +42,12 @@ public class StudentRepositoryImpl implements StudentRepository {
     }
 
     @Override
-    public void modify(Student student) {
+    public Student modify(Student student) {
         Student checkStudent = studentRepository.get(student.getId());
         if (Objects.isNull(checkStudent)) {
             throw new StudentNotFoundException();
         }
-        checkStudent.setComment(student.getComment());
-        checkStudent.setEmail(student.getEmail());
-        checkStudent.setName(student.getName());
-        checkStudent.setScore(student.getScore());
+       return studentRepository.replace(student.getId(),student);
     }
+
 }

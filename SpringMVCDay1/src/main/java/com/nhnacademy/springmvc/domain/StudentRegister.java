@@ -7,14 +7,12 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.Value;
 import org.hibernate.validator.constraints.Length;
 
 @Data
 @Valid
 public class StudentRegister {
+
     private long id;
     @NotBlank
     private String name;
@@ -24,6 +22,6 @@ public class StudentRegister {
     @Min(0)
     private int score;
     @NotBlank
-    @Length(min = 0,max = 200)
+    @Length(min = 0, max = 200)
     private String comment;
 }

@@ -13,9 +13,8 @@
     <b th:if="${#locale.toString().contains('en')}">en</b><span
         th:if="${#locale.toString().contains('ko')}">en</span>
 </a><br/>
-
 <a th:href="'/student/register'"><span th:text="#{addStudent}"/></a><br>
-<button type="button" onclick="location.href='/thymeleaf/logout'">
+<button type="button" onclick="location.href='/logout'">
     <span th:text="#{logout}"/></button>
 
 </body>

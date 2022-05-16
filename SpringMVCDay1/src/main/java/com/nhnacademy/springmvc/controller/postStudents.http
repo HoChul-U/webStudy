@@ -1,0 +1,25 @@
+GET http://localhost:8081/students/0
+Accept: application/json
+
+###
+POST http://localhost:8081/students HTTP/1.1
+Content-type: application/json
+
+{
+  "id": 20,
+  "name": "asdf",
+  "email": "hochul@naver.com",
+  "score": 50,
+  "comment": "sasdfsdfa"
+}
+
+###
+PUT http://localhost:8081/students/0 HTTP/1.1
+Content-type: application/json
+
+{
+  "name": "asdfasdasdf",
+  "email": "hochul@naver.com",
+  "score": 50,
+  "comment": "sasdfsdfaasdf"
+}
