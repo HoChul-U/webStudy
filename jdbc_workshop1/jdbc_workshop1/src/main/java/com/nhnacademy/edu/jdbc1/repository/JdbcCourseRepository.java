@@ -22,36 +22,35 @@ public class JdbcCourseRepository implements CourseRepository {
     @Override
     public Optional<Course> findById(Long id) {
         return Optional.ofNullable(
-            jdbcTemplate.queryForObject(
-                "select id, teacher_id,subject_id, created_at from JdbcCourses  where id = ?",
-                (resultSet, rowNum) ->
-                    new Course(resultSet.getLong("id"),
-                        resultSet.getLong("teacher_id"),
-                        resultSet.getLong("subject_id"),
-                        resultSet.getTimestamp("created_at")),
-                id)
+                jdbcTemplate.queryForObject(
+                        "select id, teacher_id,subject_id, created_at from JdbcCourses  where id = ?",
+                        (resultSet, rowNum) ->
+                                new Course(resultSet.getLong("id"),
+                                        resultSet.getLong("teacher_id"),
+                                        resultSet.getLong("subject_id"),
+                                        resultSet.getTimestamp("created_at")), id)
         );
     }
 
     @Override
     public List<Course> findAll() {
         return jdbcTemplate.query(
-            "select id,teacher_id,subject_id, created_at from JdbcCourses",
-            (resultSet, rowNum) ->
-                new Course(resultSet.getLong("id"),
-                    resultSet.getLong("teacher_id"),
-                    resultSet.getLong("subject_id"),
-                    resultSet.getTimestamp("created_at")));
+                "select id,teacher_id,subject_id, created_at from JdbcCourses",
+                (resultSet, rowNum) ->
+                        new Course(resultSet.getLong("id"),
+                                resultSet.getLong("teacher_id"),
+                                resultSet.getLong("subject_id"),
+                                resultSet.getTimestamp("created_at")));
     }
 
     @Override
     public int insert(Course course) {
         return jdbcTemplate.update(
-            "INSERT INTO JdbcStudents(id,teacher_id,subject_id, created_at) VALUES (?,?,?,?)",
-            course.getId(),
-            course.getTeacherId(),
-            course.getTeacherId(),
-            new Timestamp(new Date().getTime())
+                "INSERT INTO JdbcStudents(id,teacher_id,subject_id, created_at) VALUES (?,?,?,?)",
+                course.getId(),
+                course.getTeacherId(),
+                course.getTeacherId(),
+                new Timestamp(new Date().getTime())
 
         );
     }
@@ -59,8 +58,8 @@ public class JdbcCourseRepository implements CourseRepository {
     @Override
     public int delete(Long id) {
         return jdbcTemplate.update(
-            "DELETE FROM JdbcStudents WHERE id=?",
-            id
+                "DELETE FROM JdbcStudents WHERE id=?",
+                id
         );
     }
 

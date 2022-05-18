@@ -1,6 +1,6 @@
 package com.nhnacademy.edu.jdbc1.web;
 
-import com.nhnacademy.edu.jdbc1.service.login.UserRepository;
+import com.nhnacademy.edu.jdbc1.service.login.UserLoginService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -14,20 +14,21 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Objects;
 
 @Controller
 public class LoginController {
-    private final UserRepository userRepository;
+    private final UserLoginService userLoginService;
 
-    public LoginController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public LoginController(UserLoginService userLoginService) {
+        this.userLoginService = userLoginService;
     }
 
-    @GetMapping("/login")
-    public String login(@CookieValue(value = "SESSION", required = false) String session,
-                        Model model) {
-        if (StringUtils.hasText(session)) {
-            model.addAttribute("id", session);
+    @GetMapping(value = {"/","/login"})
+    public String login(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession(false);
+        if (Objects.nonNull(session)) {
+            model.addAttribute("id", session.getAttribute("id"));
             return "loginSuccess";
         } else {
             return "loginForm";
@@ -40,11 +41,9 @@ public class LoginController {
                           HttpServletRequest request,
                           HttpServletResponse response,
                           ModelMap modelMap) {
-        if (userRepository.matches(id, pwd)) {
+        if (Objects.nonNull(userLoginService.userCompare(id, pwd))) {
             HttpSession session = request.getSession(true);
-
-            Cookie cookie = new Cookie("SESSION", session.getId());
-            response.addCookie(cookie);
+            session.setAttribute("id", id);
             modelMap.put("id", id);
 
             return "loginSuccess";
