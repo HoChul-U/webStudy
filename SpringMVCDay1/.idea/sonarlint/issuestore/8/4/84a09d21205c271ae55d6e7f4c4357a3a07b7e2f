@@ -1,5 +1,2 @@
 
-w
-java:S1488H"\Immediately return this expression instead of assigning it to the temporary variable "view".(µÅÑƒþÿÿÿÿ
-X	java:S125!"<This block of commented-out lines of code should be removed.(Ð¾úÁ8—ªÿúˆ0
-h	java:S100N"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¤•Î¡úÿÿÿÿ
+h	java:S100/"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¤•Î¡úÿÿÿÿ
