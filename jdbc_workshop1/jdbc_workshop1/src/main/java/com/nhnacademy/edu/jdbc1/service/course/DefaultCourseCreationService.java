@@ -7,11 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class DefaultCourseCreationService implements CourseCreationService {
-    private final  CourseRepository courseRepository;
+    private   CourseRepository courseRepository;
 
-    public DefaultCourseCreationService(CourseRepository courseRepository) {
-        this.courseRepository = courseRepository;
-    }
 
     @Override
     public Optional<Course> getCourse(Long id) {
